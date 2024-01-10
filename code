@@ -1,0 +1,180 @@
+#!/bin/bash
+
+# internsctl - Custom Linux Command for Interns
+# Version: v0.1.0
+
+# Function to display manual page
+display_manual() {
+    echo "INTERNCTL(1)               User Commands               INTERNCTL(1)"
+    echo
+    echo "NAME"
+    echo "       internsctl - Custom Linux Command for Interns"
+    echo
+    echo "SYNOPSIS"
+    echo "       internsctl [options]"
+    echo
+    echo "DESCRIPTION"
+    echo "       internsctl is a custom Linux command created for interns. It provides various"
+    echo "       options for performing operations useful for interns."
+    echo
+    echo "OPTIONS"
+    echo "       --help      Display help information"
+    echo "       --version   Display the version of internsctl"
+    echo
+    echo "EXAMPLES"
+    echo "       internsctl --help"
+    echo "              Display help information."
+    echo
+    echo "       internsctl --version"
+    echo "              Display the version of internsctl."
+    echo
+}
+
+# Function to display help
+display_help() {
+    echo "Usage: internsctl [options]"
+    echo "Options:"
+    echo "  --help      Display this help message"
+    echo "  --version   Display the version of internsctl"
+    # Add more options and descriptions as needed
+}
+
+# Function to display version
+display_version() {
+    echo "internsctl v0.1.0"
+}
+
+show_cpu_info() {
+    lscpu
+}
+
+show_memory_info() {
+    free
+}
+
+create_user() {
+    if [ -z "$3" ]; then
+        echo "Error: Missing username. Usage: internsctl user create <username>"
+        exit 1
+    fi
+
+    sudo useradd -m "$3"
+    echo "User '$3' created successfully."
+}
+
+list_users() {
+    if [ "$2" == "--sudo-only" ]; then
+        grep -Po '^sudo.+:\K.*$' /etc/group | tr ',' '\n'
+    else
+        cut -d: -f1 /etc/passwd
+    fi
+}
+
+get_file_info() {
+    if [ -z "$2" ]; then
+        echo "Error: Missing file name. Usage: internsctl file getinfo <file-name>"
+        exit 1
+    fi
+
+    file_name="$3"
+
+    # Check if the file exists
+    if [ ! -e "$file_name" ]; then
+        echo "Error: File '$file_name' not found."
+        exit 1
+    fi
+
+    # Additional logic to get file information
+    file_access=$(stat --format="%A" "$file_name")
+    file_size=$(stat --format="%s" "$file_name")
+    file_owner=$(stat --format="%U" "$file_name")
+    file_modify=$(stat --format="%y" "$file_name")
+
+    # Display file information
+    echo "File: $file_name"
+    echo "Access: $file_access"
+    echo "Size(B): $file_size"
+    echo "Owner: $file_owner"
+    echo "Modify: $file_modify"
+}
+
+# Main logic
+
+case $1 in
+    --help)
+        display_help
+        ;;
+    --version)
+        display_version
+        ;;
+    *)
+esac
+
+if [ "$#" -eq 0 ]; then
+    display_manual
+    exit 0
+fi
+
+case $1 in
+    cpu)
+        case $2 in
+            getinfo)
+                show_cpu_info
+                ;;
+            *)
+                echo "Invalid CPU subcommand. Use 'internsctl cpu getinfo'"
+                ;;
+        esac
+esac
+
+case $1 in
+    memory)
+        case $2 in
+            getinfo)
+                show_memory_info
+                ;;
+            *)
+                echo "Invalid memory subcommand. Use 'internsctl memory getinfo'"
+                ;;
+        esac
+        ;;
+esac
+
+case $1 in
+    user)
+        case $2 in
+            create)
+                create_user "$@"
+                ;;
+            *)
+        esac
+        ;;
+esac
+
+case $1 in
+    user)
+        case $2 in
+            list)
+                list_users "$@"
+                ;;
+            *)
+        esac
+        ;;
+esac
+
+case $1 in
+    file)
+        case $2 in
+            getinfo)
+                get_file_info "$@"
+                ;;
+            *)
+                echo "Invalid file subcommand. Use 'internsctl file getinfo <file-name>'"
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        exit 1
+        ;;
+esac
