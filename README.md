@@ -42,7 +42,14 @@ $ internsctl user list
 ![WhatsApp Image 2024-01-10 at 17 09 42_184a1e31](https://github.com/ladiff777/linux_task/assets/81437219/a7714922-a212-4ed1-9064-28391a4b7be8)
 
 $ internsctl user list --sudo-only
+
+![WhatsApp Image 2024-01-10 at 17 10 28_2c3cbf1f](https://github.com/ladiff777/linux_task/assets/81437219/453be22f-0e0e-4f19-a7af-57f87784c4a6)
+
 $ internsctl file getinfo <file-name>
+![WhatsApp Image 2024-01-10 at 17 12 46_6342abcf](https://github.com/ladiff777/linux_task/assets/81437219/bfacfb84-7cb2-48af-b567-06f853ed553d)
+
+$ internsctl file getinfo [options] <file-name>
+
 
 
 
