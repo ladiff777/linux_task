@@ -14,8 +14,37 @@ The `internsctl` command is a custom Linux command developed to assist with vari
 
 ## Manual Page
 To access the manual page for the `internsctl` command, use the following:
-```bash
+
 man internsctl
 
-## Help
+![WhatsApp Image 2024-01-10 at 16 58 12_ebddb856](https://github.com/ladiff777/linux_task/assets/81437219/8cbd33c2-09e7-4b75-b1b7-1f04678cef03)
+
+
+internsctl --help
+
+![WhatsApp Image 2024-01-10 at 16 59 58_3351f2d8](https://github.com/ladiff777/linux_task/assets/81437219/3240b153-ddfa-465d-a15a-3e58e45a26fc)
+
+internsctl --version
+
+![WhatsApp Image 2024-01-10 at 17 01 16_9fa17e20](https://github.com/ladiff777/linux_task/assets/81437219/c2c4d23c-d23e-4873-9552-d5d7d0d0f0b3)
+
+$ internsctl cpu getinfo
+![WhatsApp Image 2024-01-10 at 17 03 26_f3fbb368](https://github.com/ladiff777/linux_task/assets/81437219/d23ba702-eb67-49bb-8344-59a26003b5d0)
+
+
+$ internsctl memory getinfo
+![WhatsApp Image 2024-01-10 at 17 03 58_7b50d867](https://github.com/ladiff777/linux_task/assets/81437219/11b0afb7-7b9a-4642-ade6-89beccb00c2d)
+
+$ internsctl user create <username>
+![WhatsApp Image 2024-01-10 at 17 07 09_07b56623](https://github.com/ladiff777/linux_task/assets/81437219/57a7eb1c-1093-4d67-8af1-499b3b2c9708)
+
+$ internsctl user list
+![WhatsApp Image 2024-01-10 at 17 09 42_184a1e31](https://github.com/ladiff777/linux_task/assets/81437219/a7714922-a212-4ed1-9064-28391a4b7be8)
+
+$ internsctl user list --sudo-only
+$ internsctl file getinfo <file-name>
+
+
+
+
 
